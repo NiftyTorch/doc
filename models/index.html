@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Models - NiftyTorch Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Models";
+    var mkdocs_page_input_path = "models.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> NiftyTorch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">NiftyTorch</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attention/">Attention</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../layers/">Layers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../loader/">Loader</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../loss/">Loss</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Models</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#alexnet">AlexNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vggnet">VGGNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#resnet">ResNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#shufflenet">ShuffleNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#squeezenet">SqueezeNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#xnor-net">XNOR-Net</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../training/">Training</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../transformations/">Transformations</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../license/">Licence</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">NiftyTorch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Models</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="models">Models</h1>
+<p>The Models module contains a list of model that can be used for Classification, Segmentation and Generation.</p>
+<h2 id="modules">Modules</h2>
+<h3 id="alexnet">AlexNet</h3>
+<p>For network information, see AlexNet <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">paper</a>.</p>
+<p>Parameters:</p>
+<ul>
+<li>intial_feature_map_size (int,required): The input tensor size.
+<li>num_classes (int,required): The number of class in the data.
+<li>in_channels (int,required): The number of channels in the input tensor.
+<li>strides (list,default = [1,2,1,1,1]): The strides in each convolutional layer of the AlexNet.
+<li>channels (list,default = [1,2,2,2,1]): The channels in each convolutional layer of the AlexNet.
+<li>kernel_size (list,default = [3,5,3,3,1]): The size of kernels in each convolutional layer of the AlexNet.
+<li>padding (list,default = [0,1,1,1,1]): The padding in each convolutional layer of the AlexNet.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.AlexNet import AlexNet
+import torch
+initial_feature_map = 128
+num_classes = 2
+in_channels = 1
+demographic = ['factor1','factor2']
+strides = [1,2,1,1,1]
+channels = [1,2,2,2,1]
+kernel_size = [3,5,3,3,1]
+padding = [0,1,1,1,1]
+input = torch.random.rand(64,in_channels,initial_feature_map,initial_feature_map,initial_feature_map)
+model = AlexNet(initial_feature_map,num_classes = num_classes,in_channels = in_channels,strides = stirdes,channels,kernel_size = kernel_size,padding = padding,demographic = demographic)
+</code></pre>
+
+<h3 id="vggnet">VGGNet</h3>
+<p>For network information, see VGGNet <a href="https://arxiv.org/pdf/1409.1556.pdf">paper</a>.</p>
+<p>Parameters for VGG_Net:
+image_scale, cfgs, version, features, num_classes,init_weights
+<ul>
+<li>image_scale (int,requried): The input tensor size along width size.
+<li>cfgs (int,required): The configuration of VGG_Net
+<li>version (str,required): The version can be 'A','B','D' or 'E'.
+<li>features (torch.Tensor,required): The features from convolution layers.
+<li>num_classes (int,default = 2): The classes in the dataset.
+<li>init_weights (bool,default = False): The if true weights are initialzed using kaiming normal or else it is initialized randomly.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul></p>
+<p>Parameters for make_layers:</p>
+<ul>
+<li>cfg (list,required): The configuration for VGG Net (cfgs[version]).
+<li>in_channels (int,default = 1): The number of channels in the input tensor.
+<li>batchnorm (boolean,default = True): This boolean variable is used to inidicated whether the batchnorm layer is required.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.VGG_Net import VGG
+from NiftyTorch.Models.VGG_Net import make_layers
+import torch
+image_scale = 128
+demographic = ['factor1','factor2']
+cfgs = {'A':[32,32,32,'M',64,64,64]}
+version = 'A'
+in_channels = 1
+features = make_layers(cfgs[version],in_channels = in_channels,batchnorm = False)
+num_classes = 2
+init_weights = True
+input = torch.random.rand(64,in_channels,image_scale,image_scale,image_scale)
+model = VGG(image_scale,cfgs = cfgs,version = version,features = featurs,num_classes = num_classes,init_weights = init_weights,demographic = demographic)
+</code></pre>
+
+<h3 id="resnet">ResNet</h3>
+<p>For network information, see ResNet <a href="https://arxiv.org/abs/1512.03385">paper</a>.</p>
+<p>Parameters:</p>
+<ul>
+<li>block (model,required): The block can be BasicBlock or BottleNeck Layers.
+<li>layers (int,required): The number of layers in the block layers.
+<li>stride (int,required): The stride at each layer the size of stride is same as the number of layers.
+<li>in_channels (int,required): The number of channels in the input data.
+<li>num_classes (int,required): The number of class in the data.
+<li>zero_init_residual (bool,default = False): This variable decides whether the batchnorm layer is to be initialized.
+<li>groups (int,default = 1): The number of groups to be considered in the block layer.
+<li>width_per_group (int,default = 64): The number of channels in each block layer.
+<li>replace_stride_with_dilation (bool,default = False): The dilation at each block layer.
+<li>norm_layer (torch.nn,default = None): The type of norm layer to be used.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.ResNet import ResNet
+import torch
+import torch.nn as nn
+from NiftyTorch.Layers.Convolutional_Layers import BottleNeck
+block = BottleNeck
+demographic = ['factor1','factor2']
+layers = [1,2,1,1,2]
+stride = [1,1,1,1,1]
+num_classes = 2
+zero_init_residual = True
+groups = 1
+replace_stride_with_dilation = [2,2,2,2,2]
+norm_layer = nn.Batchnorm
+in_channels = 1
+input = torch.random.rand(64,in_channels,32,32,32)
+model = ResNet(block = block,layers = layers,stride = stride,in_channels = 1,num_classes = num_classes,zero_init_residual = zero_init_residual,groups = groups,replace_stride_with_dilation = replace_stride_with_dilation,norm_layer = norm_layer,demographic = demographic)
+</code></pre>
+
+<h3 id="shufflenet">ShuffleNet</h3>
+<p>For network information, see ShuffleNet <a href="https://arxiv.org/abs/1707.01083">paper</a>.</p>
+<p>Parameters:</p>
+<ul>
+<li>stage_repeats (list,required): The number of times each stage is repeated
+<li>groups (int, deafult = 3): number of groups to be used in grouped 1x1 convolutions in each ShuffleUnit.
+<li>in_channels (int, deafult = 1): number of channels in the input tensor.
+<li>num_classes (int, default = 2): number of classes to predict.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.ShuffleNet import ShuffleNet
+import torch
+import torch.nn as nn
+stage_repeats  = [3,7,3]
+groups = 5
+num_classes = 2
+demographic = ['factor1','factor2']
+in_channels = 1
+model = ShuffleNet(stage_repeats = stage_repeats,groups = groups,in_channels = 1,num_classes = num_classes,demographic = demographic)
+</code></pre>
+
+<h3 id="squeezenet">SqueezeNet</h3>
+<p>For network information, see SqueezeNet <a href="https://arxiv.org/abs/1602.07360">paper</a>.</p>
+<p>Parameters:</p>
+<ul>
+<li>version (str,default = '1_0'): The version of shuffleNet to be used.
+<li>num_classes (str, deafult = 2): Number of classes in the dataset.
+<li>in_channels (int, deafult = 1): number of channels in the input tensor.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.SqueezeNet import SqueezeNet
+import torch
+import torch.nn as nn
+version  = '1_1'
+num_classes = 2
+in_channels = 1
+model = SqueezeNet(version = version,num_classes = 2,in_channels = 1)
+</code></pre>
+
+<h3 id="xnor-net">XNOR-Net</h3>
+<p>For network information, see XNOR-Net <a href="https://arxiv.org/abs/1603.05279">paper</a>.</p>
+<p>Parameters:
+<ul>
+<li>image_scale: The input tensor size along width size. 
+<li>num_classes: Number of classes in the dataset.
+<li>in_channels: number of channels in the input tensor.
+<li>channels: The channels in each convolutional layer of the AlexNet.
+<li>kernel_size: The size of kernels in each convolutional layer of the AlexNet.
+<li>strides: The strides in each convolutional layer of the AlexNet.
+<li>padding: The padding in each convolutional layer of the AlexNet.
+<li>groups: The number of groups to be considered in the block layer.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul></p>
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Models.XNOR_NET import AlexNet
+image_scale = 128
+num_classes = 2
+in_channels = 1
+demographic = ['factor1','factor2']
+channels = [8,16,24,32,32,32]
+kernel_size = [11, 5, 3, 3, 3]
+strides = [4, 1, 1, 1, 1]
+padding = [0, 2, 1, 1, 1]
+groups = [1, 1, 1, 1, 1]
+AlexNet(image_scale = image_scale,num_classes = num_classes,in_channels = in_channels,channels = channels,kernel_size = kernel_size,strides = strides,padding = padding,groups = groups,demographic = demographic)
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../training/" class="btn btn-neutral float-right" title="Training">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../loss/" class="btn btn-neutral" title="Loss"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../loss/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../training/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

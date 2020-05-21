@@ -1,0 +1,12 @@
+site_name: NiftyTorch Documentation
+nav:
+    - NiftyTorch: index.md
+    - Attention: attention.md
+    - Layers: layers.md
+    - Loader: loader.md
+    - Loss: loss.md
+    - Models: models.md
+    - Training: training.md
+    - Transformations: transformations.md
+    - Licence: license.md
+theme: readthedocs

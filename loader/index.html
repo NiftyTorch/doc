@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Loader - NiftyTorch Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Loader";
+    var mkdocs_page_input_path = "loader.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> NiftyTorch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">NiftyTorch</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attention/">Attention</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../layers/">Layers</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Loader</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#classification-dataloader">Classification DataLoader</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#segmentation-dataloader">Segmentation DataLoader</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../loss/">Loss</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../models/">Models</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../training/">Training</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../transformations/">Transformations</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../license/">Licence</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">NiftyTorch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Loader</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="loader">Loader</h1>
+<p>The Loader class is used to Load data for various types of tasks such as classification, image generation and image segmentation.<br>
+The Loader class has <code>Classification DataLoader</code> for classification tasks and <code>Segmentation DataLoader</code> for image-to-image (image generation) and image-to-labels (segmentation) tasks.</p>
+<h2 id="classification-dataloader">Classification DataLoader</h2>
+<p>For <code>Classification DataLoader</code> the class label can be provided to the model in the form of a csv file, which contains a <em>filename label</em> and <em>classname label</em>.<br>
+The input file is written as <strong>input_image.nii.gz</strong><br>
+The output file is written as <strong>output_labels.csv</strong><br></p>
+<p>Parameters:
+<ul>
+<li>root (str,required): This is path to the directory where the data is stored
+<li>csv_dir (str,required): This is the csv file which contains the subject and its corresponding label
+<li>transform (torchvision.transforms,required) : The transforms here is the transforms from torchvision library
+<li>target_transform (torchvision.transforms,required): The target tranforms is the same as transforms parameter but the transformation is done on the test data
+<li>loader (function,required): The type of loader to be used, current loader uses nipy.
+<li>is_valid_file (function,required): List of type of files to be considered to be loaded as an input data. 
+<li>filename_label (str,required): The filename label in the CSV file.
+<li>class_label (str,required): The class label in the CSV file.
+<li>file_type (tuple,default = ('nii.gz','.nii')): The file types to be considered as an input for the model. The resulting files are stacked along channels in the input tensor.
+<li>common (int,default = 64): The common is the size of the 3D Tensor.
+<li>demographic (list,default = []): The list demographic factors to be used for classification.
+</ul></p>
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Loader.Classification_Loader import ImageFolder
+from torchvision import transforms
+data_transforms = transforms.Compose([transforms.ToTensor()])
+data_folder = &quot;../data/train/&quot;
+data_csv = &quot;../data.csv&quot;
+filename_label = &quot;Subject&quot;
+class_label = &quot;labels&quot;
+image_scale = 32
+file_type = ('t1w.nii.gz','flair.nii.gz')
+demographic = ['factor1','factor2']
+image_datasets = ImageFolder(root = data,data_csv = data_csv,transforms = data_transforms,target_transforms = data_transforms,loader = ,filename_label = filename_label,class_label = class_label,common = image_scale,file_type = file_type,demographic = demographic)
+</code></pre>
+
+<h2 id="segmentation-dataloader">Segmentation DataLoader</h2>
+<p>The <code>Segmentation DataLoader</code> is used for image segmentation and image generation.<br>
+The input file is written as <strong>input_image.nii.gz</strong><br>
+The output file is written as <strong>seg.nii.gz</strong><br></p>
+<p>Parameters:
+<ul>
+<li>root (str,required): This is path to the directory where the data is stored.
+<li>transform (torchvision.transforms,required) : The transforms here is the transforms from torchvision library
+<li>target_transform (torchvision.transforms,required): The target tranforms is the same as transforms parameter but the transformation is done on the test data
+<li>loader (function,required): The type of loader to be used, current loader uses nipy.
+<li>is_valid_file (function,required): List of type of files to be considered to be loaded as an input data.
+<li>common (int,default = 64): The common is the size of the 3D Tensor.
+</ul></p>
+<p>Usage:</p>
+<pre><code class="python">from NiftyTorch.Loader.Segmentation_DataLoader import ImageFolder
+from torchvision import transforms
+data_transforms = transforms.Compose([transforms.ToTensor()])
+data_folder = &quot;../data/train/&quot;
+image_scale = 32
+image_datasets = ImageFolder(root = data,data_csv = data_csv,transforms = data_transforms,target_transforms = data_transforms,loader = ,filename_label = filename_label,class_label = class_label,common = image_scale)
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../loss/" class="btn btn-neutral float-right" title="Loss">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../layers/" class="btn btn-neutral" title="Layers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../layers/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../loss/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

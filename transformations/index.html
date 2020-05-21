@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Transformations - NiftyTorch Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Transformations";
+    var mkdocs_page_input_path = "transformations.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> NiftyTorch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">NiftyTorch</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attention/">Attention</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../layers/">Layers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../loader/">Loader</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../loss/">Loss</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../models/">Models</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../training/">Training</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Transformations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#add-noise">Add Noise</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rotate-90">Rotate 90</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rotate-180">Rotate 180</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rotate-270">Rotate 270</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#random_segmentation_crop">Random_Segmentation_Crop</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#resize">Resize</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../license/">Licence</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">NiftyTorch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Transformations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="transformations">Transformations</h1>
+<h2 id="modules">Modules</h2>
+<h3 id="add-noise">Add Noise</h3>
+<p>The <code>Add_Noise</code> is often used for data augmentation and sometimes as regularization.<br>
+The function adds gaussian centered around the given mean and standard deviation to the input.<br></p>
+<p>Parameters:
+inputs (Torch.Tensor,required): The input tensor which has to be transformed.
+mean (Torch.Tensor,default = None): The mean of gaussian noise to be added as a tensor.
+std (Torch.Tensor,default = None): The std of gaussian noise to be added as a tensor.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+from NiftyTorch.Transformations.Transformations import Add_Noise
+output = Add_Noise(input,mean = torch.zeros(input.shape),std = torch.eye(input.shape))
+</code></pre>
+
+<h3 id="rotate-90">Rotate 90</h3>
+<p>Rotate the input tensor by 90.</p>
+<p>Parameters:
+inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+from NiftyTorch.Transformations.Transformations import Rotate_90
+output = Rotate_90(input)
+</code></pre>
+
+<h3 id="rotate-180">Rotate 180</h3>
+<p>Rotate the input tensor by 180.</p>
+<p>Parameters:
+inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+from Transformations.Transformations import Rotate_180
+output = Rotate_180(input)
+</code></pre>
+
+<h3 id="rotate-270">Rotate 270</h3>
+<p>Rotate the input tensor by 270.</p>
+<p>Parameters:
+inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+from NiftyTorch.Transformations.Transformations import Rotate_270
+output = Rotate_180(input)
+</code></pre>
+
+<h3 id="random_segmentation_crop">Random_Segmentation_Crop</h3>
+<p>The <code>Random_Segmentation_Crop</code> is often used with segmentation.<br>
+The idea behind random crop is select regions around lesions and use only this region to train the network.</p>
+<p>Parameters:
+input: the input 3D image.
+mask: the mask of the lesion region.
+context: the region around the lesion to be considered for crop.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+mask = torch.zeros(64,512,32,32,32)
+context = 32
+from NiftyTorch.Transformations.Transformations import Random_Segmentation_Crop
+input,mask = Random_Segmentation_Crop(input,mask,context)
+</code></pre>
+
+<h3 id="resize">Resize</h3>
+<p>The <code>Resize</code> module is used to resize the input tensor to the given size.</p>
+<p>Parameters:
+input (torch.Tensor,required): the input 3D image.
+mask (torch.Tensor,default = None): the mask of the lesion region.
+common: the size to which the tensor is to be resized.</p>
+<p>Usage:</p>
+<pre><code class="python">import torch
+input = torch.ones(64,512,32,32,32)
+mask = torch.zeros(64,512,32,32,32)
+context = 32
+from NiftyTorch.Transformations.Transformations import Resize
+input,mask = Resize(input,mask,context)
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../license/" class="btn btn-neutral float-right" title="Licence">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../training/" class="btn btn-neutral" title="Training"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../training/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../license/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
