@@ -145,7 +145,7 @@ std (Torch.Tensor,default = None): The std of gaussian noise to be added as a te
 <p>Usage:</p>
 <pre><code class="python">import torch
 input = torch.ones(64,512,32,32,32)
-from NiftyTorch.Transformations.Transformations import Add_Noise
+from niftytorch.Transformations.Transformations import Add_Noise
 output = Add_Noise(input,mean = torch.zeros(input.shape),std = torch.eye(input.shape))
 </code></pre>
 
@@ -156,7 +156,7 @@ inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
 <p>Usage:</p>
 <pre><code class="python">import torch
 input = torch.ones(64,512,32,32,32)
-from NiftyTorch.Transformations.Transformations import Rotate_90
+from niftytorch.Transformations.Transformations import Rotate_90
 output = Rotate_90(input)
 </code></pre>
 
@@ -167,7 +167,7 @@ inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
 <p>Usage:</p>
 <pre><code class="python">import torch
 input = torch.ones(64,512,32,32,32)
-from Transformations.Transformations import Rotate_180
+from niftytorch.Transformations.Transformations import Rotate_180
 output = Rotate_180(input)
 </code></pre>
 
@@ -178,7 +178,7 @@ inputs (torch.Tensor,required): The input tensor which needs to rotated.</p>
 <p>Usage:</p>
 <pre><code class="python">import torch
 input = torch.ones(64,512,32,32,32)
-from NiftyTorch.Transformations.Transformations import Rotate_270
+from niftytorch.Transformations.Transformations import Rotate_270
 output = Rotate_180(input)
 </code></pre>
 
@@ -194,7 +194,7 @@ context: the region around the lesion to be considered for crop.</p>
 input = torch.ones(64,512,32,32,32)
 mask = torch.zeros(64,512,32,32,32)
 context = 32
-from NiftyTorch.Transformations.Transformations import Random_Segmentation_Crop
+from niftytorch.Transformations.Transformations import Random_Segmentation_Crop
 input,mask = Random_Segmentation_Crop(input,mask,context)
 </code></pre>
 
@@ -209,7 +209,7 @@ common: the size to which the tensor is to be resized.</p>
 input = torch.ones(64,512,32,32,32)
 mask = torch.zeros(64,512,32,32,32)
 context = 32
-from NiftyTorch.Transformations.Transformations import Resize
+from niftytorch.Transformations.Transformations import Resize
 input,mask = Resize(input,mask,context)
 </code></pre>
               

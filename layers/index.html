@@ -152,7 +152,7 @@
 <li>bias (int, default = False)
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from Layers.Convolutional_Layers import Conv3x3
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import Conv3x3
 import torch
 in_planes = 512
 input = torch.rand(32,in_planes,32,32,32)
@@ -171,7 +171,7 @@ output = convolution(input)
 <li>bias (int, default = False)
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Layers.Convolutional_Layers import Conv1x1
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import Conv1x1
 import torch
 in_planes = 512
 input = torch.rand(32,in_planes,32,32,32)
@@ -195,7 +195,7 @@ output = convolution(input)
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Layers.Convolutional_Layers import BasicBlock
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import BasicBlock
 import torch
 in_planes = 512
 input = torch.rand(32,in_planes,32,32,32)
@@ -221,7 +221,7 @@ output = convolution_block(input)
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Layers.Convolutional_Layers import BottleNeck
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import BottleNeck
 import torch
 in_planes = 512
 planes = 256
@@ -244,7 +244,7 @@ The ShuffleUnit is commonly used in ShuffleNet 1.0 and ShuffleNet 2.0, but they 
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Layers.Convolutional_Layers import ShuffleUnit
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import ShuffleUnit
 import torch
 in_planes = 512
 planes = 256
@@ -267,7 +267,7 @@ The Fire Module is commonly used in Squeezenet 1.0 and SqueezeNet 2.0 but they c
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Layers.Convolutional_Layers import Fire
+<pre><code class="python">from niftytorch.Layers.Convolutional_Layers import Fire
 import torch
 in_planes = 20
 input = torch.rand(32,20,32,32,32)
@@ -280,7 +280,7 @@ output = convolution_block(input)
 This is used in Binary Networks and XNOR Network.<br></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from NiftyTorch.Layers.Convolutional_Layers import BinActive
+from niftytorch.Layers.Convolutional_Layers import BinActive
 input = torch.ones(32,512,32,32,32)
 activation = BinActive()
 output = activation(input)
@@ -301,7 +301,7 @@ output = activation(input)
 
 <p>Usage:</p>
 <pre><code class="python">import torch
-from NiftyTorch.Layers.Convolutional_Layers import BinConv3d
+from niftytorch.Layers.Convolutional_Layers import BinConv3d
 in_channels = 512
 input = torch.ones(32,in_channels,32,32,32)
 activation = BinConv3d(input_channels = in_channels,output_channels = 256,kernel_size = 3,stride = 2,padding = 1,groups = 1,dropout = 0.5,Linear = False)

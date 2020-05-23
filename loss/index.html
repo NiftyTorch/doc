@@ -144,7 +144,7 @@
 <li>weight (torch.FloatTensor,default = None) : The alpha is the weight to be used as a multiplier for probabilities of each class.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import weighted_cross_entropy
+<pre><code class="python">from niftytorch.Loss.Losses import weighted_cross_entropy
 import torch
 import numpy as np
 num_classes = 32
@@ -167,7 +167,7 @@ print(loss(input,output))
 <li>size_average (boolean,default = True): The size_average tells whether to average the loss if true else it the sum is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import FocalLoss
+<pre><code class="python">from niftytorch.Loss.Losses import FocalLoss
 import torch
 import numpy as np
 num_classes = 32
@@ -188,7 +188,7 @@ print(loss(input,output))
 <li>num_class (int,required): The number of classes in the problem.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import FocalDiceLoss
+<pre><code class="python">from niftytorch.Loss.Losses import FocalDiceLoss
 import torch
 import numpy as np
 num_class = 32
@@ -208,7 +208,7 @@ print(loss(input,output))
 <li>eps (float,required): It is a really small number which decides which used along with denominator in dice loss to avoid division by zero error.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import tversky_loss
+<pre><code class="python">from niftytorch.Loss.Losses import tversky_loss
 import torch
 import numpy as np
 num_class = 32
@@ -228,7 +228,7 @@ print(loss(input,output))
 <li>size_average (Boolean,default = True): If true, then the loss is averaged or else the sum of the loss is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import ContrastiveLoss
+<pre><code class="python">from niftytorch.Loss.Losses import ContrastiveLoss
 import torch
 margin = 10.0
 input1 = torch.random.rand(64,1024)
@@ -246,7 +246,7 @@ print(loss(input1,input2,output))
 <li>size_average (Boolean,default = True): If true, then the loss is averaged or else the sum of the loss is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Loss.Losses import TripletLoss
+<pre><code class="python">from niftytorch.Loss.Losses import TripletLoss
 import torch
 anchor =  torch.random.rand(64,1024) #embedding for anchor
 positive = torch.random.rand(64,1024) #embedding for positive sample

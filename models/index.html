@@ -84,6 +84,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#xnor-net">XNOR-Net</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#u-net">U-Net</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -151,7 +153,7 @@
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.AlexNet import AlexNet
+<pre><code class="python">from niftytorch.Models.AlexNet import AlexNet
 import torch
 initial_feature_map = 128
 num_classes = 2
@@ -186,8 +188,8 @@ image_scale, cfgs, version, features, num_classes,init_weights
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.VGG_Net import VGG
-from NiftyTorch.Models.VGG_Net import make_layers
+<pre><code class="python">from niftytorch.Models.VGG_Net import VGG
+from niftytorch.Models.VGG_Net import make_layers
 import torch
 image_scale = 128
 demographic = ['factor1','factor2']
@@ -219,10 +221,10 @@ model = VGG(image_scale,cfgs = cfgs,version = version,features = featurs,num_cla
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.ResNet import ResNet
+<pre><code class="python">from niftytorch.Models.ResNet import ResNet
 import torch
 import torch.nn as nn
-from NiftyTorch.Layers.Convolutional_Layers import BottleNeck
+from niftytorch.Layers.Convolutional_Layers import BottleNeck
 block = BottleNeck
 demographic = ['factor1','factor2']
 layers = [1,2,1,1,2]
@@ -249,7 +251,7 @@ model = ResNet(block = block,layers = layers,stride = stride,in_channels = 1,num
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.ShuffleNet import ShuffleNet
+<pre><code class="python">from niftytorch.Models.ShuffleNet import ShuffleNet
 import torch
 import torch.nn as nn
 stage_repeats  = [3,7,3]
@@ -270,7 +272,7 @@ model = ShuffleNet(stage_repeats = stage_repeats,groups = groups,in_channels = 1
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.SqueezeNet import SqueezeNet
+<pre><code class="python">from niftytorch.Models.SqueezeNet import SqueezeNet
 import torch
 import torch.nn as nn
 version  = '1_1'
@@ -294,7 +296,7 @@ model = SqueezeNet(version = version,num_classes = 2,in_channels = 1)
 <li>demographic (list,default = []): The list demographic factors to be used for classification.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from NiftyTorch.Models.XNOR_NET import AlexNet
+<pre><code class="python">from niftytorch.Models.XNOR_NET import AlexNet
 image_scale = 128
 num_classes = 2
 in_channels = 1
@@ -305,6 +307,35 @@ strides = [4, 1, 1, 1, 1]
 padding = [0, 2, 1, 1, 1]
 groups = [1, 1, 1, 1, 1]
 AlexNet(image_scale = image_scale,num_classes = num_classes,in_channels = in_channels,channels = channels,kernel_size = kernel_size,strides = strides,padding = padding,groups = groups,demographic = demographic)
+</code></pre>
+
+<h3 id="u-net">U-Net</h3>
+<p>Parameters:</p>
+<ul>
+<li>in_channels(int,required): The number of channels in the input data.
+<li>out_channels(int,required): The number of channels in the output data.
+<li>init_features(int,required): The number of initial features to which the upsampling and downsampling operations are applied to.
+<li>norm_layer (torch.nn,default = None): The type of norm layer to be used.
+<li>kernel_size(list,default=[]): The size of kernels in each convolutional layer of the UNet.
+<li>strides(list,default=[]): The strides in each convolutional layer of the UNet.
+<li>padding(list,default=[]): The padding in each convolutional block of the UNet.
+<li>in_channels = 1
+<li>out_channels = 1
+<li>init_features = 16
+<li>norm_layer = torch.nn.BatchNorm3d
+<li>kernel_size = [3,3,5,5,5,5,4,4,5,4,1]
+<li>stride = [2,2,2,2,2,2,2,2]
+<li>padding = [1,1]
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">in_channels = 1
+out_channels = 1
+init_features = 16
+norm_layer = torch.nn.BatchNorm3d
+kernel_size = [3,3,5,5,5,5,4,4,5,4,1]
+stride = [2,2,2,2,2,2,2,2]
+padding = [1,1]
 </code></pre>
               
             </div>

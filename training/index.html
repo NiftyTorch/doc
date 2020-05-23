@@ -183,7 +183,7 @@
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.AlexNet import train_alexnet
+from niftytorch.Models.AlexNet import train_alexnet
 from torchvision import transforms
 
 data_transforms = transforms.Compose([transforms.ToTensor()])
@@ -203,7 +203,7 @@ train.train()
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.VGG_Net import train_vggnet
+from niftytorch.Models.VGG_Net import train_vggnet
 from torchvision import transforms
 
 data_transforms = transforms.Compose([transforms.ToTensor()])
@@ -226,7 +226,7 @@ train.train()
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.ResNet import train_resnet
+from niftytorch.Models.ResNet import train_resnet
 from torchvision import transforms
 from NiftyTorch.Layers.Convolutional_Layers import BottleNeck
 data_transforms = transforms.Compose([transforms.ToTensor()])
@@ -248,7 +248,7 @@ train.train()
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.ShuffleNet import train_shufflenet
+from niftytorch.Models.ShuffleNet import train_shufflenet
 from torchvision import transforms
 data_transforms = transforms.Compose([transforms.ToTensor()])
 groups = 2
@@ -267,7 +267,7 @@ train.train()
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.SqueezeNet import train_squeezenet
+from niftytorch.Models.SqueezeNet import train_squeezenet
 from torchvision import transforms
 data_transforms = transforms.Compose([transforms.ToTensor()])
 version = '1_1'
@@ -289,7 +289,7 @@ train.train()
 </ul></p>
 <p>Usage:</p>
 <pre><code class="python">import torch
-from Models.XNOR_NET import train_xnornet
+from niftytorch.Models.XNOR_NET import train_xnornet
 from torchvision import transforms
 data_transforms = transforms.Compose([transforms.ToTensor()])
 version = '1_1'
