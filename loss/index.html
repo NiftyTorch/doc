@@ -80,6 +80,32 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#triplet-loss">Triplet Loss</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lovaz-softmax-loss">Lovaz softmax loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#soft-n-cut-loss">Soft N cut Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#soft-n-cut-loss_1">Soft N cut Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#totalvariation">TotalVariation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#psnr">PSNR</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#large-margin-softmax-loss">Large-Margin Softmax Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#additive-margin-softmax">Additive Margin Softmax</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#angular-loss">Angular Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#circle-loss">Circle Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fast-ap-loss">Fast AP Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lifted-loss">Lifted Loss</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#proxy-anchor">Proxy Anchor</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#proxy-nca">Proxy NCA</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -137,26 +163,25 @@
 <p>The Loss module consists a collection of loss functions which can be used for learning model and optimizing the weights.</p>
 <h2 id="modules">Modules</h2>
 <h3 id="weighted-cross-entropy">Weighted Cross Entropy</h3>
-<p>The <code>weighted_cross_entropy</code> loss function weights probabilities for each class with weighted assigned by the user and then normalized by total weight.<br></p>
+<p>The <code>crossentropyloss</code> loss function weights probabilities for each class with weighted assigned by the user and then normalized by total weight.<br></p>
 <p>Parameters:
 <ul>
-<li>num_class (int,required): The number of classes in the problem.
 <li>weight (torch.FloatTensor,default = None) : The alpha is the weight to be used as a multiplier for probabilities of each class.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import weighted_cross_entropy
+<pre><code class="python">from niftytorch.loss.losses import crossentropyloss
 import torch
 import numpy as np
 num_classes = 32
 weight = np.random.rand(num_classes)
 input = torch.random.rand(64,num_classes)
 output = torch.zeroes(64,num_classes)
-loss = weighted_cross_entropy(num_class = num_classes,weight = weight)
+loss = crossentropyloss(weight = weight)
 print(loss(input,output))
 </code></pre>
 
 <h3 id="focal-loss">Focal Loss</h3>
-<p>The idea behind <code>FocalLoss</code> is to not only weight the probabilities according to class imbalance, but also take into consideration the difficulty of classifying the example. </p>
+<p>The idea behind <code>focalloss</code> is to not only weight the probabilities according to class imbalance, but also take into consideration the difficulty of classifying the example. </p>
 <p>Parameters:
 <ul>
 <li>num_class (int,required): The number of classes in the problem.
@@ -167,19 +192,19 @@ print(loss(input,output))
 <li>size_average (boolean,default = True): The size_average tells whether to average the loss if true else it the sum is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import FocalLoss
+<pre><code class="python">from niftytorch.loss.losses import focalloss
 import torch
 import numpy as np
 num_classes = 32
 alpha = np.random.rand(num_classes)
 input = torch.random.rand(64,num_classes)
 output = torch.zeroes(64,num_classes)
-loss = FocalLoss(num_class = num_classes,alpha = alpha,gamma = 2.0,balance_index = 1,smooth = 0.1,size_average = True)
+loss = focalloss(num_class = num_classes,alpha = alpha,gamma = 2.0,balance_index = 1,smooth = 0.1,size_average = True)
 print(loss(input,output))
 </code></pre>
 
 <h3 id="focal-dice-loss">Focal Dice Loss</h3>
-<p>The idea behind <code>FocalDiceLoss</code> is to not only weight the probabilities according to class imbalance, but also take into consideration the difficulty of classifying the example by </p>
+<p>The idea behind <code>focaldiceloss</code> is to not only weight the probabilities according to class imbalance, but also take into consideration the difficulty of classifying the example by </p>
 <p>Parameters:
 <ul>
 <li>alpha (float,required): The alpha is the weight to be used as a multiplier for dice loss coefficient of each class.
@@ -188,19 +213,19 @@ print(loss(input,output))
 <li>num_class (int,required): The number of classes in the problem.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import FocalDiceLoss
+<pre><code class="python">from niftytorch.loss.losses import focaldiceloss
 import torch
 import numpy as np
 num_class = 32
 alpha = torch.random.rand(num_class)
 input = torch.random.rand(64,num_class)
 output = torch.zeroes(64,num_class)
-loss = FocalDiceLoss(alpha = alpha,gamma = 2.0,eps = 1e-8,num_class = num_class)
+loss = focaldiceloss(alpha = alpha,gamma = 2.0,eps = 1e-8,num_class = num_class)
 print(loss(input,output))
 </code></pre>
 
 <h3 id="tversky-loss">Tversky Loss</h3>
-<p>The <code>tversky_loss</code> function is used to weight false positive and false negative in the loss.</p>
+<p>The <code>tverskyloss</code> function is used to weight false positive and false negative in the loss.</p>
 <p>Parameters:
 <ul>
 <li>alpha (float,required): The alpha is the weight to be used as a multiplier for dice loss coefficient of each class.
@@ -208,19 +233,19 @@ print(loss(input,output))
 <li>eps (float,required): It is a really small number which decides which used along with denominator in dice loss to avoid division by zero error.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import tversky_loss
+<pre><code class="python">from niftytorch.loss.losses import tverskyloss
 import torch
 import numpy as np
 num_class = 32
 alpha = torch.random.rand(num_class)
 input = torch.random.rand(64,num_class)
 output = torch.zeroes(64,num_class)
-loss = tversky_loss(alpha = alpha,gamma = 2.0,eps = 1e-8)
+loss = tverskyloss(alpha = alpha,gamma = 2.0,eps = 1e-8)
 print(loss(input,output))
 </code></pre>
 
 <h3 id="contrastive-loss">Contrastive Loss</h3>
-<p>The <code>ContrastiveLoss</code> function is used in few shot learning paradigm. The inputs of the contrastive loss are two input tensors and target tensor. The target is 0 if they're of different class else it is 1.</p>
+<p>The <code>contrastiveloss</code> function is used in few shot learning paradigm. The inputs of the contrastive loss are two input tensors and target tensor. The target is 0 if they're of different class else it is 1.</p>
 <p>Parameters:
 <ul>
 <li>margin (float,required): The margin is the maximum allowed to distance between the input distances.
@@ -228,31 +253,303 @@ print(loss(input,output))
 <li>size_average (Boolean,default = True): If true, then the loss is averaged or else the sum of the loss is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import ContrastiveLoss
+<pre><code class="python">from niftytorch.loss.losses import contrastiveloss
 import torch
 margin = 10.0
 input1 = torch.random.rand(64,1024)
 input2 = torch.random.rand(64,1024)
 output = torch.zeroes(64) #assuming they're from different class if you they're from same class use torch.ones(64,num_class)
-loss = ContrastiveLoss(margin = margin,eps = 1e-8,size_average = True)
+loss = contrastiveloss(margin = margin,eps = 1e-8,size_average = True)
 print(loss(input1,input2,output))
 </code></pre>
 
 <h3 id="triplet-loss">Triplet Loss</h3>
-<p>The <code>TripletLoss</code> is used in few shot learning paradigm. The inputs of the triplet loss are two tensor of different classes and an anchor tensor. The distance between the anchor and positive, the distance between the anchor and negative is used assign the class for the anchor.</p>
+<p>The <code>tripletloss</code> is used in few shot learning paradigm. The inputs of the triplet loss are two tensor of different classes and an anchor tensor. The distance between the anchor and positive, the distance between the anchor and negative is used assign the class for the anchor.</p>
 <p>Parameters:
 <ul>
 <li>margin (float,required): The margin is the maximum allowed to distance between the input distances.
 <li>size_average (Boolean,default = True): If true, then the loss is averaged or else the sum of the loss is returned.
 </ul></p>
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Loss.Losses import TripletLoss
+<pre><code class="python">from niftytorch.loss.losses import tripletloss
 import torch
 anchor =  torch.random.rand(64,1024) #embedding for anchor
 positive = torch.random.rand(64,1024) #embedding for positive sample
 negative = torch.random.rand(64,1024) #embedding for negative sample
-loss = TripletLoss(margin = margin,size_average = True)
+loss = tripletloss(margin = margin,size_average = True)
 print(loss(anchor,positive,negative))
+</code></pre>
+
+<h3 id="lovaz-softmax-loss">Lovaz softmax loss</h3>
+<p>Parameters:</p>
+<ul>
+<li>per_image (bool,default = True): The parameters tells if the loss has to be calculated for all the parameters.
+<li>ignore (int,default = None): The labels which have value same as ignore is removed.
+<li>classes (list/string,default = 'present'): If the value is equal to 'all' then all classes are considered else if for 'present' the loss is computed for classes present in labels, or a list of classes to average.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import lovaszsoftmaxloss
+import torch
+batch = 16
+height = 128
+width = 128
+logits =  torch.random.rand(batch,height,width) #logits
+labels = torch.zeros(batch,height,width) #labels
+loss = lovaszsoftmaxloss()
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="soft-n-cut-loss">Soft N cut Loss</h3>
+<p>Parameters:</p>
+<ul>
+<li>k (int,required): The number of classes.
+<li>input_size (int,required): The height/width of the image.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import softncutloss
+import torch
+k = 4
+input_size = 128
+batch = 16
+logits =  torch.random.rand(batch,k,input_size,input_size) #logits
+labels = torch.zeros(batch,k,input_size,input_size) #labels
+loss = softncutloss(k = k,input_size = input_size)
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="soft-n-cut-loss_1">Soft N cut Loss</h3>
+<p>Parameters:</p>
+<ul>
+<li>k (int,required): The number of classes.
+<li>input_size (int,required): The height/width of the image.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import softncutloss
+import torch
+k = 4
+input_size = 128
+batch = 16
+logits =  torch.random.rand(batch,k,input_size,input_size) #logits
+labels = torch.zeros(batch,k,input_size,input_size) #labels
+loss = softncutloss(k = k,input_size = input_size)
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="totalvariation">TotalVariation</h3>
+<p>Parameters:</p>
+<ul>
+  <li>tv_weight (torch.FloatTensor,required): the weight to be given in each dimension.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import totalvariation
+import torch
+tv_weight = torch.FloatTensor([0.2,0.3,0.4])
+logits =  torch.random.rand(batch,k,input_size,input_size) #logits
+labels = torch.zeros(batch,k,input_size,input_size) #labels
+loss = totalvariation(tv_weight = tv_weight)
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="psnr">PSNR</h3>
+<p>Parameters:</p>
+<ul>
+  <li>max_val (Float,required): the signal value.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import PSNR
+import torch
+max_val = 11.2
+batch = 16
+logits =  torch.random.rand(batch,10) #logits
+labels = torch.zeros(batch,10) #labels
+loss = PSNR(max_val = max_val)
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="large-margin-softmax-loss">Large-Margin Softmax Loss</h3>
+<p>Parameters:</p>
+<ul>
+  <li>input_dim: The size of features.
+  <li>num_classes: The number of classes in classifier
+  <li>margin: The margin size
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import lsoftmax
+import torch
+batch = 16
+input_dim = 128
+num_classes = 2
+margin = 2
+features =  torch.random.rand(batch,input_dim) #logits
+labels = torch.zeros(batch,num_classes) #labels
+loss = lsoftmax(input_dim = input_dim,num_classes = num_classes,margin = 2)
+print(loss(features,labels))
+</code></pre>
+
+<h3 id="additive-margin-softmax">Additive Margin Softmax</h3>
+<p>Parameters:</p>
+<ul>
+  <li>in_feats (int,required): The size of features.
+  <li>num_class (int,default = 10): The number of classes in classifier.
+  <li>gamma (float,default = 0.3): The margin size.
+  <li>it (float,default = 0): 
+  <li>lambdamin = 5.0
+  <li>lambdamax = 1500
+  <li>lamb = 1500
+  <li>device (string,default = 'cuda:2'): The device where gpu is present.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import amsoftmax
+import torch
+batch = 16
+infeat = 128
+num_class = 2
+device = 'cuda:1'
+gamma = 0
+features =  torch.random.rand(batch,input_dim) #logits
+labels = torch.zeros(batch,num_classes) #labels
+loss = amsoftmax(in_feats = in_feats,num_classes = num_classes,m = 2,s = 2,device = 'cuda:2')
+print(loss(logits,labels))
+</code></pre>
+
+<h3 id="angular-loss">Angular Loss</h3>
+<p>Parameters:</p>
+<ul>
+  <li>l2_reg (float,default = 0.02): The l2 loss coefficient.
+  <li>angle (int,default = 50): The angle between positives and negatives.
+  <li>lambda_ang (float,default = 0.02): The angle hyperparameter.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import angularloss
+import torch
+batch = 16
+l2_reg = 1e-4
+angle = 20
+lambda_ang = 2.5
+negative_examples = 4
+positive =  torch.random.rand(batch,128)
+anchor =  torch.random.rand(batch,128)
+negative =  torch.random.rand(batch,negative_examples,128)
+loss = angularloss(l2_reg=l2_reg, angle = angle, lambda_ang = lambda_ang)
+print(loss(positive,anchor,negative))
+</code></pre>
+
+<h3 id="circle-loss">Circle Loss</h3>
+<p>Parameters:</p>
+<ul>
+  <li>m (float,default = 0.02): The margin.
+  <li>gamma (int,default = 50): The scaling factor.
+  <li>
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import circleloss
+import torch
+batch = 16
+m = 2
+gammma = 2
+positive =  torch.random.rand(batch,128) #logits
+negative = torch.zeros(batch,128) #labels
+loss = circleloss(m = m,gamma = gamma)
+print(loss(positive,negative))
+</code></pre>
+
+<h3 id="fast-ap-loss">Fast AP Loss</h3>
+<p>Parameters:</p>
+<ul>
+  <li>bin_size (int,required): The margin.
+  <li>start_bin (float,required): The start bin value.
+  <li>end_bin (float,required): The end bin value.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import fastaploss
+import torch
+batch = 16
+bin_size = 16 
+start_bin = 0
+end_bin = 4
+num_classes = 2
+output =  torch.random.rand(batch,128)
+pos_output = torch.zeros(batch,128)
+neg_output = torch.zeros(batch,128)
+labels = torch.zeros(batch,num_classes)
+loss = fastaploss(bin_size = bin_size,start_bin = start_bin,end_bin = end_bin)
+print(loss(output,pos_output,neg_output,labels))
+</code></pre>
+
+<h3 id="lifted-loss">Lifted Loss</h3>
+<p>Parameters:</p>
+<ul>
+  <li>margin (int,default = 1): The margin.
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import liftedloss
+import torch
+batch = 16
+margin = 1
+features =  torch.random.rand(batch,128)
+labels = torch.zeros(batch,num_classes)
+loss = liftedloss(margin = margin)
+print(loss(features,labels))
+</code></pre>
+
+<h3 id="proxy-anchor">Proxy Anchor</h3>
+<p>Parameters:</p>
+<ul>
+<li>nb_classes: The number of classes
+<li>device: The device in which classifier should be stored
+<li>sz_embed: The sz_embed embedding size of the input tensor
+<li>mrg (float,default = 0.1): the margin
+<li>alpha (int,default = 32): the scaling factor
+</ul>
+
+<p>Usage:</p>
+<pre><code class="python">from niftytorch.loss.losses import proxyanchor
+import torch
+batch = 16
+nb_classes = 2
+device = 'cuda:2'
+sz_embed = 128
+mrg = 0.1
+alpha = 32
+features =  torch.random.rand(batch,128)
+labels = torch.zeros(batch,num_classes)
+loss = proxyanchor(nb_classes = nb_classes,device = device,sz_embed = sz_embed,mrg = mrg,alpha = alpha)
+print(loss(features,labels))
+</code></pre>
+
+<h3 id="proxy-nca">Proxy NCA</h3>
+<ul>
+<li>nb_classes: The number of classes
+<li>sz_embedding: The embedding size
+<li>infeat (int, required): The size of the input features
+<li>device (string, default = 'cuda:0'): The device in which the embedder is to be placed
+<li>smoothing_const (float, default = 0.1): The smoothening constant
+<li>scaling_x (int, default = 1): The scaling factor for norm of proxies
+<li>scaling_p (int,default = 3): The scaling factor for norm of input features.
+</ul>
+
+<pre><code class="python">from niftytorch.loss.losses import proxynca
+import torch
+batch = 16
+nb_classes = 2
+device = 'cuda:2'
+sz_embedding = 128
+infeat = 128
+features =  torch.random.rand(batch,infeat)
+labels = torch.zeros(batch,num_classes)
+loss = proxyanchor(nb_classes = nb_classes,device = device,sz_embedding = sz_embedding,infeat = infeat)
+print(loss(features,labels))
 </code></pre>
               
             </div>

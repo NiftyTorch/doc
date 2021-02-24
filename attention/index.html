@@ -141,8 +141,8 @@
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Attention.Attention import PAM_Module
-PAM = PAM_Module(in_shape = 512,reduction = 8,query_conv_kernel = 3,key_conv_kernel = 3,value_conv_kernel = 3)
+<pre><code class="python">from niftytorch.attention.attention import pam
+PAM = pam(in_shape = 512,reduction = 8,query_conv_kernel = 3,key_conv_kernel = 3,value_conv_kernel = 3)
 t = torch.rand(64,512,32,32)
 out,attention = PAM(t)
 print(out.shape)
@@ -161,8 +161,8 @@ print(attention.shape)
 </ul>
 
 <p>Usage:</p>
-<pre><code class="python">from niftytorch.Attention.Attention import CAM_Module
-PAM = CAM_Module(512)
+<pre><code class="python">from niftytorch.attention.attention import cam
+PAM = cam(512)
 t = torch.rand(64,512,32,32)
 out,attention = CAM(t)
 print(out.shape)
